@@ -113,10 +113,9 @@ __global__ void addVectorsGPU(float *a, float *b, float *c, int n)
 	//avoids overlap in block working on same job
 	int id = blockIdx.x * blockDim.x +threadIdx.x; //modified to handle the block size
 	
-	while(id < n)
+	if(id < n)
 	{
 		c[id] = a[id] + b[id];
-		id += blockDim.x;
 	}
 }
 
