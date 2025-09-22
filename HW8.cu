@@ -115,11 +115,14 @@ void dotProductCPU(float *a, float *b, float *C_CPU, int n)
 1-shared memory to hold the products
 2- store threadIDx.x into TID for ease of access
 3- load the elements into it we use if else statment we fill 0 for thread index beyond the array
+this is where the elements are multiplied
 4- we start to fold the array using a formula that will work for odd or even N sizes labeled half
-5- Each iteration of the loop has the first half of active threads simultaneously add their value to the thread a “stride” away, 
-halving the number of elements to sum each time until only one thread holds the final dot product.
+	'half' is calculated as (n + 1)/2 to correctly handle both odd and even n.
+5- In each iteration, the first half of active threads add their value to the element 'stride' away, 
+	halving the number of elements to sum each time until only one thread holds the final dot product. 
 6-thread 0 writes the final accumulate sum form shared memory into global memory producing the dot product
 */
+
 __global__ void dotProductGPU(float *a, float *b, float *C_GPU, int n)
 {
 	//1
