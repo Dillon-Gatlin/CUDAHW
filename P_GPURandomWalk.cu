@@ -1,4 +1,4 @@
-// Name:
+// Name:Dillon Gatlin
 // GPU random walk. 
 // nvcc P_GPURandomWalk.cu -o temp
 
