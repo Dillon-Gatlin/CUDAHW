@@ -1,4 +1,4 @@
-// Name: 
+// Name: Dillon Gatlin
 // Creating a GPU nBody simulation from an nBody CPU simulation. 
 // nvcc S_NBodyCPUToGPU1Block.cu -o temp -lglut -lm -lGLU -lGL
 
@@ -44,7 +44,7 @@ float3 *P, *V, *F;
 float *M; 
 float GlobeRadius, Diameter, Radius;
 float Damp;
-//------------------------------------------------------------------device/cuda pointers
+//------------------------------------------------------------------device/cuda pointers------------------------------------------------------------------
 //will be used to point to device memory for positions, velocities, forces, and masses
 float3 *d_P, *d_V, *d_F;
 float *d_M;
@@ -58,7 +58,7 @@ void timer();
 void setup();
 void nBody();
 int main(int, char**);
-//------------------------------------------------------------------GPU kernel prototype
+//------------------------------------------------------------------GPU kernel prototype------------------------------------------------------------------
 __global__ void nBodyGPU(int N, float3 *P, float3 *V, float3 *F, float *M, float dt, float Damp);
 
 void keyPressed(unsigned char key, int x, int y)
@@ -186,7 +186,7 @@ void setup()
 		
 		M[i] = 1.0;
 	}
-    //----------------------------------------------------------------------- Allocate device memory
+    //----------------------------------------------------------------------- Allocate device memor------------------------------------------------------------------y
     cudaMalloc((void**)&d_P, N*sizeof(float3));
     cudaMalloc((void**)&d_V, N*sizeof(float3));
     cudaMalloc((void**)&d_F, N*sizeof(float3));
@@ -197,7 +197,7 @@ void setup()
     cudaMemcpy(d_M, M, N*sizeof(float), cudaMemcpyHostToDevice);
 	printf("\n To start timing type s.\n");
 }
-/*--------------------------------------------------------------------------------GPU nBody kernel function
+/*--------------------------------------------------------------------------------GPU nBody kernel function------------------------------------------------------------------
 1- is to get the thread index and make sure it is in range.
 2- to zero out the force on body i.
 3- computes the force on body i due to all other bodies. note that we skip the force calculation if i == j.
@@ -240,7 +240,7 @@ __global__ void nBodyKernel(int N, float3 *P, float3 *V, float3 *F, float *M, fl
     P[i].z += V[i].z*dt;
 }
 
-/*----------------------------------------------------------------------Changes to nBody
+/*----------------------------------------------------------------------Changes to nBody------------------------------------------------------------------
 1- is to add a loop to run the simulation for the desired time
 2- is to call the GPU kernel to do the force, velocity, and position updates. only if the drawCount == DRAW_RATE do we copy the positions back to the CPU and draw them.
 3- this is to copy the final positions back to the CPU after the simulation is done.
