@@ -1,8 +1,10 @@
-// Name:
+// Name: Dillon Gatlin
 // Optimizing nBody GPU code. 
 //---Orginal compile command
-// nvcc V_nBodySpeedChallenge.cu -o temp -lglut -lm -lGLU -lGL 
+// nvcc V_nBodySpeedChallenge.cu -o temp -lglut -lm -lGLU -lGL //DONT USE PLEASE TRY OTHER ONE (UNSURE IF ACTUALLY BETTER SINCE IT IS INCOSISTENT for both)
 
+//ALSO I FOUND OUT IF YOU DRAW the image out it is a poor way to measure speed, since window size can affect runtime.
+//UNSURE if you are drawing them out but running without drawing is apparently better benchmark unless you set window size same for everyone
 
 //------------------------------------------------------------------optimized compile command
 // nvcc -O3 V_nBodySpeedChallenge.cu -o temp -lglut -lm -lGLU -lGL   
